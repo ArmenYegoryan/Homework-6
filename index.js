@@ -4,7 +4,7 @@ import { Transform, Readable, Writable } from "stream";
 
 const rs = new Readable({
     read() {
-        setInterval(() => {
+        setTimeout(() => {
             this.push(moment().toISOString());
         }, 1000);
     },
@@ -18,7 +18,7 @@ const ws = new Writable({
 
 const ts = new Transform({
     transform(chunk, UTF8, callback) {
-        this.push((moment(chunk).format("MMMM Do YYYY, h:mm:ss a")).toString() + "\n");
+        this.push((moment(chunk).format("MMMM Do YYYY, h:mm:ss:SS a")).toString() + "\n");
         callback();
     }
 })
